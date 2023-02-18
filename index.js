@@ -3,7 +3,8 @@ const hero = {
   name: "Wizard",
   avatar: "images/wizard.png",
   health: 60,
-  diceRoll: 3,
+  diceRoll: [3, 1, 4],
+  diceCount: 3,
 };
 
 const monster = {
@@ -11,15 +12,28 @@ const monster = {
   name: "Orc",
   avatar: "images/orc.png",
   health: 10,
-  diceRoll: 4,
+  diceRoll: [4],
+  diceCount: 1,
 };
 
-// CHALLENGE
-// 1. Deconstruct the data object
-// 2. Update the template string as necessary
+function getDiceHtml(diceCount) {
+  return getDiceRollArray(diceCount)
+    .map((dice) => `<div class="dice">${dice}</div>`)
+    .join("");
+}
+
+function getDiceRollArray(diceCount) {
+  return new Array(diceCount)
+    .fill(0)
+    .map(() => Math.floor(Math.random() * 6) + 1);
+}
+
+console.log(getDiceRollArray(6));
 
 function renderCharacter(data) {
-  const { elementId, name, avatar, health, diceRoll } = data;
+  const { elementId, name, avatar, health, diceRoll, diceCount } = data;
+  const diceHtml = getDiceHtml(diceCount);
+
   document.getElementById(
     data.elementId
   ).innerHTML = `<div class="character-card">
@@ -27,7 +41,7 @@ function renderCharacter(data) {
           <img class="avatar" src="${avatar}" />
           <div class="health">health: <b> ${health} </b></div>
           <div class="dice-container">
-              <div class="dice"> ${diceRoll} </div>
+            ${diceHtml}
           </div>
       </div>`;
 }
