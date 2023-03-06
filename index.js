@@ -2,7 +2,7 @@ import Character from "./Character.js";
 import characterData from "./data.js";
 
 function attack() {
-  console.log("attack");
+  render();
 }
 
 function render() {

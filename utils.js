@@ -4,4 +4,10 @@ function getDiceRollArray(diceCount) {
     .map(() => Math.floor(Math.random() * 6) + 1);
 }
 
-export { getDiceRollArray };
+function getDicePlaceholderHtml(diceCount = this.diceCount) {
+  return new Array(diceCount)
+    .fill(`<div class="placeholder-dice"></div>`)
+    .join("");
+}
+
+export { getDiceRollArray, getDicePlaceholderHtml };
